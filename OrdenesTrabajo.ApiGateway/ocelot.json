@@ -1,0 +1,49 @@
+{
+  "Routes": [
+
+    {
+
+      "UpstreamPathTemplate": "/Login/InicioSesion",
+      "UpstreamHttpMethod": [ "POST" ],
+
+      "DownstreamPathTemplate": "/LoginService/api/Login/InicioSesion",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8009
+        }
+      ],
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "",
+        "AllowedScopes": []
+      }
+    },
+
+
+    {
+
+      "UpstreamPathTemplate": "/Menu/ObtenerMenu",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+
+      "DownstreamPathTemplate": "/MenuService/api/Menu/ObtenerMenu",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8009
+        }
+      ],
+
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    }
+  ],
+
+  
+  "GlobalConfiguration": {}
+}

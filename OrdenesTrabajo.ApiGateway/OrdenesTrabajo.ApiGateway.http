@@ -1,0 +1,6 @@
+@OrdenesTrabajo.ApiGateway_HostAddress = http://localhost:5047
+
+GET {{OrdenesTrabajo.ApiGateway_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
