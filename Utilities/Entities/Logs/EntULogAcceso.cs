@@ -12,6 +12,6 @@ namespace Utilities.Entities.Logs
         public int fnTipoSession { get; set; }
         public string fcIpMachine { get; set; }
         public string fcTicketSession { get; set; }
-        public int fnOpcion { get; set; }
+        public int fnOpcion { get; set; }  
     }
 }
