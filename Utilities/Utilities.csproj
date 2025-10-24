@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <Folder Include="Entities\Usuario\" />
-    <Folder Include="Interfaces\Logs\" />
     <Folder Include="Metodos\Logs\" />
   </ItemGroup>
 
