@@ -16,8 +16,8 @@ namespace MenuService.Infrastructure.Persistence
         }
         public DbSet<EntMenu> EntMenus { get; set; }
 
-        public List<EntMenu> ObtenerMenuAsync(string fcNumeroEmpleado) =>
-       EntMenus.FromSqlInterpolated($"EXEC dbo.spConsOT2MenuUsuario {fcNumeroEmpleado}").ToList();
+        public async Task<List<EntMenu>> ObtenerMenuAsync(string fcNumeroEmpleado) =>
+       await EntMenus.FromSqlInterpolated($"EXEC dbo.spConsOT2MenuUsuario {fcNumeroEmpleado}").ToListAsync();
 
     }
 }

@@ -1,4 +1,6 @@
-﻿using LoginService.Domain.Entities.Usuario;
+﻿using LoginService.Aplication.UseCases.Dto;
+using LoginService.Domain.Entities.Usuario;
+using MenuService.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

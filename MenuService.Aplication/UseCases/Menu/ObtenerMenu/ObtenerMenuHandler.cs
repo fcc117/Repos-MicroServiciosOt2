@@ -26,14 +26,14 @@ namespace MenuService.Aplication.UseCases.Menu.ObtenerMenu
                 lstmenu = await _repositorioMenu.ObtenerMenuAsync(consulta.fcNumeroEmpleado);
                 resultado.exito = true;
                 resultado.datalist = lstmenu;
-                return resultado;
             }
             catch (Exception ex)
             {
                 resultado.exito = false;
                 resultado.error = ex.Message;
-                return resultado;
             }
+            return resultado;
+
         }
     }
 }

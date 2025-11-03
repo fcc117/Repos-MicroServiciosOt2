@@ -14,9 +14,7 @@ namespace Utilities.Metodos
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public InfoHostDns()
-        {
-        }
+      
         public InfoHostDns(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
@@ -32,6 +30,7 @@ namespace Utilities.Metodos
             string info_UserName = Environment.UserName.ToString();
             string info_MachineName = Environment.MachineName.ToString();
             string info_DomainName = Environment.UserDomainName.ToString();
+            string info_UserAgent = _httpContextAccessor?.HttpContext?.Request?.Headers["User-Agent"].ToString() ?? "N/A";
 
             try
             {
@@ -73,6 +72,7 @@ namespace Utilities.Metodos
             infoDNS.info_UserName = info_UserName;
             infoDNS.info_MachineName = info_MachineName;
             infoDNS.info_DomainName = info_DomainName;
+            infoDNS.info_UserAgent = info_UserAgent;
 
             return infoDNS;
         }

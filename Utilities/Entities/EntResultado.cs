@@ -9,7 +9,7 @@ namespace Utilities.Entities
 {
     public class EntResultado
     {
-        public bool exito { get; set; }
+        public bool? exito { get; set; }
         public string error { get; set; }
 
         public string codeError { get; set; }

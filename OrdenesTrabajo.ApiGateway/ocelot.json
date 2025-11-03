@@ -1,6 +1,7 @@
 {
   "Routes": [
 
+    /***************************Login***************************/
     {
 
       "UpstreamPathTemplate": "/Login/InicioSesion",
@@ -20,8 +21,45 @@
         "AllowedScopes": []
       }
     },
+    {
 
+      "UpstreamPathTemplate": "/Login/InicioSesionExistente",
+      "UpstreamHttpMethod": [ "POST" ],
 
+      "DownstreamPathTemplate": "/LoginService/api/Login/InicioSesionExistente",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8009
+        }
+      ],
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "",
+        "AllowedScopes": []
+      }
+    },
+    {
+
+      "UpstreamPathTemplate": "/Login/CierreSesion",
+      "UpstreamHttpMethod": [ "POST" ],
+
+      "DownstreamPathTemplate": "/LoginService/api/Login/CierreSesion",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8009
+        }
+      ],
+
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "",
+        "AllowedScopes": []
+      }
+    },
+    /***************************Menu***************************/
     {
 
       "UpstreamPathTemplate": "/Menu/ObtenerMenu",
@@ -38,12 +76,34 @@
 
 
       "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
+        "AuthenticationProviderKey": "",
+        //"AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+
+    /***************************Tickets***************************/
+
+    {
+      "UpstreamPathTemplate": "/Ticket/ObtenerTotalesTicket",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+
+      "DownstreamPathTemplate": "/TicketService/api/Ticket/ObtenerTotalesTicket",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8009
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "",
+        //"AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
       }
     }
   ],
 
-  
+
   "GlobalConfiguration": {}
 }

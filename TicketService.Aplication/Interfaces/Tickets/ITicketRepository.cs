@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TicketService.Domain.Entities;
+
+namespace TicketService.Aplication.Interfaces.Tickets
+{
+    public interface ITicketRepository
+    {
+        Task<List<EntTotalesTickets>> obtenerTotalesTicketAsync(string fcNumeroEmpleado);
+
+    }
+}

@@ -13,5 +13,6 @@ namespace Utilities.Entities.Network
         public string info_UserName { get; set; }
         public string info_MachineName { get; set; }
         public string info_DomainName { get; set; }
+        public string info_UserAgent { get; set; }
     }
 }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace LoginService.Infrastructure.Persistence.Log
 {
-    public class LoginAccesoDbContext:DbContext
+    public class LoginAccesoDbContext : DbContext
     {
 
         public LoginAccesoDbContext(DbContextOptions<LoginAccesoDbContext> options) : base(options)
@@ -29,7 +29,7 @@ namespace LoginService.Infrastructure.Persistence.Log
             if (string.IsNullOrWhiteSpace(fcNumeroEmpleado))
                 return null;
 
-             var result = await entUsuario.FromSqlInterpolated($"EXEC dbo.spConsOT2EstructuraUsuario {fcNumeroEmpleado}").ToListAsync();
+            var result = await entUsuario.FromSqlInterpolated($"EXEC dbo.spConsOT2EstructuraUsuario {fcNumeroEmpleado}").ToListAsync();
             return result.FirstOrDefault();
         }
 
@@ -45,15 +45,15 @@ namespace LoginService.Infrastructure.Persistence.Log
 
         public async Task<string> consultaAccesoUsuarioAsync(EntLogAcceso model)
         {
-            var result = await Database.SqlQueryRaw<string>("EXEC dbo.spConsOT2SesionUsuario  @p0, @p1, @p2, @p3, @p4, @p5", 
-                model.fcNumeroEmpleado,model.fcOrigenIP,model.fcNavegador,model.fcPCName,model.fcUserDomainName,model.fcTipoAcceso).ToListAsync();
+            var result = await Database.SqlQueryRaw<string>("EXEC dbo.spConsOT2SesionUsuario  @p0, @p1, @p2, @p3, @p4, @p5",
+                model.fcNumeroEmpleado, model.fcOrigenIP, model.fcNavegador, model.fcPCName, model.fcUserDomainName, model.fcTipoAcceso).ToListAsync();
             return result.FirstOrDefault();
         }
 
         public async Task<int> insertaCierreSesionUsuarioAsync(EntLogAcceso model)
         {
-            var result = await Database.SqlQueryRaw<int>("EXEC dbo.spUpdOT2CambiaEstatusSesionUsuario  @p0, @p1, @p2, @p3, @p4, @p5",
-                 model.fcNumeroEmpleado, model.fcOrigenIP, model.fcNavegador, model.fcPCName, model.fcUserDomainName, model.fcTipoAcceso).ToListAsync();
+            var result = await Database.SqlQueryRaw<int>("EXEC dbo.spUpdOT2CambiaEstatusSesionUsuario @p0, @p1, @p2, @p3, @p4, @p5, @p6",
+          model.fcNumeroEmpleado,model.fcOrigenIP,model.fcNavegador,model.fnTipoCierre,model.fcPCName, model.fcUserDomainName, model.fcTipoAcceso).ToListAsync();
             return result.FirstOrDefault();
         }
 

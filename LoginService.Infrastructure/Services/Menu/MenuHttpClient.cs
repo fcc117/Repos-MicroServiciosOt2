@@ -22,7 +22,7 @@ namespace LoginService.Infrastructure.Services.Menu
         }
         public async Task<List<MenuResponseDto>> ObtenerMenuPorEmpleadoAsync(string fcNumeroEmpleado, string token)
         {
-            string url = "/ApiGateway/Menu/ObtenerMenu";//"/MenuService/api/Menu/ObtenerMenu";
+            string url = "/ApiGateway/Menu/ObtenerMenu";//"/MenuService/api/Menu/ObtenerMenu"; //http://localhost:8009/Menuservice/api/Menu/ObtenerMenu
             var payload = new { fcNumeroEmpleado };
 
             var jsonContent = JsonContent.Create(payload);
@@ -30,7 +30,7 @@ namespace LoginService.Infrastructure.Services.Menu
             var request = new HttpRequestMessage(HttpMethod.Post, url);
             request.Content = jsonContent;
 
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            //request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
             var response = await _httpClient.SendAsync(request);
             response.EnsureSuccessStatusCode();

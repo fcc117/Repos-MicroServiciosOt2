@@ -12,21 +12,28 @@ using MenuService.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Utilities.Conexion;
 using Utilities.Entities.Token;
+using Utilities.Metodos;
 
 var builder = WebApplication.CreateBuilder(args);
 
 /*******************************************************/
 
 // base de datos
-builder.Services.AddDbContext<LoginAccesoDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("OrdenesTrabajoConnection")));
-builder.Services.AddDbContext<MenuDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("OrdenesTrabajoConnection")));
+builder.Services.AddDbContext<LoginAccesoDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("OrdenesTrabajoConnection"), SqlServerOptions =>
+{
+    SqlServerOptions.CommandTimeout(120);
+}));
+//builder.Services.AddDbContext<MenuDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("OrdenesTrabajoConnection")));
 // Asegúrate de que "MenuConnection" sea la cadena de conexión correcta para la base de datos de menú.
 // Registrar el repositorio 
 builder.Services.AddScoped<ISamlService, SamlServices>();
 builder.Services.AddScoped<IDbHelper, DbHelper>();
 builder.Services.AddScoped<ILoginAccesoRepository, LoginAccesoRepository>();
-builder.Services.AddScoped<IMenuRepository, MenuRepository>();
+//builder.Services.AddScoped<IMenuRepository, MenuRepository>();
 builder.Services.AddScoped<IJwtGeneratorService, JwtGeneratorService>();
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<InfoHostDns>();
 
 // Registrar MediatR
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ObtenerInfoSamlHandler).Assembly));
@@ -39,16 +46,12 @@ builder.Services.AddScoped<IJwtGeneratorService, JwtGeneratorService>();
 
 builder.Services.AddHttpClient<IMenuService, MenuHttpClient>(client =>
 {
-    // 2. Lee la URL base de tu archivo de configuración.
     var configuration = builder.Services.BuildServiceProvider().GetRequiredService<IConfiguration>();
     client.BaseAddress = new Uri(configuration["MicroserviceUrls:MenuService"]
                                ?? throw new InvalidOperationException("Falta la URL de MenuService en la configuración."));
 });
 
 /*******************************************************/
-
-
-// Add services to the container.
 
 builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();

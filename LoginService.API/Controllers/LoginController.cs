@@ -30,13 +30,13 @@ namespace LoginService.API.Controllers
             if (request.Password == "usr" + dia)
             {
                 result = await _mediator.Send(new LoginQuery { fcNumeroEmpleado = request.UserName, fcPassword = request.Password, fcUserAgent = HttpContext.Request.Headers["User-Agent"].ToString() });
-                if (result.exito)
+                if (result.exito == null)
                 {
-                    return Ok(result);
+                    return BadRequest(result);
                 }
                 else
                 {
-                    return BadRequest(result);
+                    return Ok(result);
                 }
             }
             else
@@ -47,8 +47,39 @@ namespace LoginService.API.Controllers
 
                 return Ok(result);
             }
+        }
 
+        [HttpPost("InicioSesionExistente")]
+        public async Task<IActionResult> InicioSesionExistente([FromBody] LoginUserRequest request)
+        {
 
+            var result = new EntResultado();
+
+            result = await _mediator.Send(new LoginQuery { fcNumeroEmpleado = request.UserName, fcPassword = request.Password, fcUserAgent = HttpContext.Request.Headers["User-Agent"].ToString() });
+            if (result.exito == null)
+            {
+                return BadRequest(result);
+            }
+            else
+            {
+                return Ok(result);
+            }
+
+        }
+
+        [HttpPost("CierreSesion")]
+        public async Task<IActionResult> CierreSesion([FromBody] CierreSesionRequest request)
+        {
+            var result = new EntResultado();
+            result = await _mediator.Send(new CierreSesionQuery { fcNumeroEmpleado = request.fcNumeroEmpleado, fcTipoAcceso = request.fcTipoAcceso, fnTipoCierre = request.fnTipoCierre });
+            if (result.exito == null)
+            {
+                return BadRequest(result);
+            }
+            else
+            {
+                return Ok(result);
+            }
         }
     }
 }

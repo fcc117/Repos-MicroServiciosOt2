@@ -4,6 +4,7 @@ using LoginService.Aplication.Interfaces.Saml;
 using LoginService.Aplication.UseCases.Dto;
 using LoginService.Domain.Entities.Usuario;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.Identity.Client;
@@ -26,16 +27,19 @@ namespace LoginService.Aplication.UseCases.Login
         private readonly IMenuService _menuService;
         private readonly IJwtGeneratorService _jwtgenerator;
         private readonly EntJwt _jwtOpc;
+        private readonly InfoHostDns _infoHostDns;
         public LoginHandler(ILoginAccesoRepository loginAccesoRepository
             , IMenuService menuService
             , IJwtGeneratorService jwtgenerator
             , IOptions<EntJwt> jwtOpc
+            , InfoHostDns infoHostDns
             )
         {
             _loginAccesoRepository = loginAccesoRepository;
             _menuService = menuService;
             _jwtgenerator = jwtgenerator;
             _jwtOpc = jwtOpc.Value;
+            _infoHostDns = infoHostDns;
         }
         public async Task<EntResultado<EntUsuario>> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
@@ -48,8 +52,8 @@ namespace LoginService.Aplication.UseCases.Login
             string refreshToken = string.Empty;
             try
             {
-                InfoHostDns objInfo = new InfoHostDns();
-                EntUInfoHostDns objInfoHostDns = objInfo.ObtenerInfoDNS();
+
+                var objInfoHostDns = _infoHostDns.ObtenerInfoDNS();
                 objUsuario = await _loginAccesoRepository.consultaExistenciaUsuarioAsync(request.fcNumeroEmpleado);
                 if (objUsuario is not null)
                 {
@@ -95,7 +99,7 @@ namespace LoginService.Aplication.UseCases.Login
                             result.data = null;
                             result.exito = false;
                             result.codeError = "1";
-                            result.error = "SesionExistente";
+                            result.error = "Sesión existente";
                             result.accessToken = "";
                             result.refreshToken = "";
 
@@ -107,7 +111,7 @@ namespace LoginService.Aplication.UseCases.Login
                         result.data = null;
                         result.exito = false;
                         result.codeError = "2";
-                        result.error = "PerfilNoAutorizado";
+                        result.error = "Perfil no autorizado";
                         result.accessToken = "";
                         result.refreshToken = "";
                     }
@@ -119,7 +123,7 @@ namespace LoginService.Aplication.UseCases.Login
                     result.data = null;
                     result.exito = false;
                     result.codeError = "3";
-                    result.error = "PerfilNoAutorizado";
+                    result.error = "Sin acceso";
                     result.accessToken = "";
                     result.refreshToken = "";
                 }
@@ -129,7 +133,7 @@ namespace LoginService.Aplication.UseCases.Login
                 result.objectlist = null;
                 result.data = null;
                 result.error = ex.ToString();
-                result.exito = false;
+                result.exito = null;
                 result.codeError = "4";
                 result.accessToken = "";
                 result.refreshToken = "";

@@ -9,7 +9,7 @@ namespace MenuService.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class MenuController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -22,13 +22,13 @@ namespace MenuService.API.Controllers
         public async Task<IActionResult> ObtenerMenu([FromBody] MenuRequest request)
         {
             var resultado = await _mediator.Send(new ObtenerMenuQuery { fcNumeroEmpleado = request.fcNumeroEmpleado });
-            if (resultado.exito)
+            if (resultado.exito == null)
             {
-                return Ok(resultado); 
+                return BadRequest(resultado); 
             }
             else
             {
-                return BadRequest(resultado); 
+                return Ok(resultado); 
             }
         }
     }

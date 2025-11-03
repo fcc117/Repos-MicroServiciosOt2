@@ -1,11 +1,11 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using MenuService.Aplication.Interfaces;
-using MenuService.Infrastructure.Persistence;
-using MenuLayoutService.Aplication.UseCases.Menu.CrearMenu;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using TicketService.Infrastructure.Persistence;
+using TicketService.Aplication.Interfaces.Tickets;
+using TicketService.Aplication.UseCase.ObtenerTickets;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,18 +26,20 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+
+// Registrar el repositorio de menu
+builder.Services.AddScoped<ITicketRepository, TicketRepository>();
+
 // base de datos
-builder.Services.AddDbContext<MenuDbContext>(options =>
+builder.Services.AddDbContext<TicketDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("OrdenesTrabajoConnection"), SqlServerOptions =>
     {
         SqlServerOptions.CommandTimeout(120);
     }));
 
-// Registrar el repositorio de menu
-builder.Services.AddScoped<IMenuRepository, MenuRepository>();
-
 // Registrar MediatR
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CrearMenuCommand).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ObtenerTotalesTicketHandler).Assembly));
+
 
 // Add services to the container.
 builder.Services.AddControllers();
