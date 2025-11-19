@@ -6,6 +6,8 @@ using System.Text;
 using TicketService.Infrastructure.Persistence;
 using TicketService.Aplication.Interfaces.Tickets;
 using TicketService.Aplication.UseCase.ObtenerTickets;
+using TicketService.Aplication.Interfaces.Catalogo;
+using TicketService.Infrastructure.Persistence.Catalogo;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +31,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 // Registrar el repositorio de menu
 builder.Services.AddScoped<ITicketRepository, TicketRepository>();
+builder.Services.AddScoped<ICatalogoRepository, CatalogoRepository>();
 
 // base de datos
 builder.Services.AddDbContext<TicketDbContext>(options =>
