@@ -10,7 +10,7 @@ using Utilities.Entities;
 
 namespace TicketService.Aplication.UseCase.Catalogo
 {
-    internal class ObtenerUnidadNegocioHandler : IRequestHandler<ObtenerUnidadNegocioQuery, EntResultado<EntCatalogo>>
+    public class ObtenerUnidadNegocioHandler : IRequestHandler<ObtenerUnidadNegocioQuery, EntResultado<EntCatalogo>>
     {
         private readonly ICatalogoRepository _catalogoRepository;
 
@@ -22,12 +22,10 @@ namespace TicketService.Aplication.UseCase.Catalogo
         public async Task<EntResultado<EntCatalogo>> Handle(ObtenerUnidadNegocioQuery consulta, CancellationToken cancellationToken)
         {
             var resultado = new EntResultado<EntCatalogo>();
-            var lstunidadnegocio = new List<EntCatalogo>();
             try
             {
-                resultado.datalist = await _catalogoRepository.obtenerUnidadNegocio(consulta.idArea, consulta.idRequerimiento);
+                resultado.datalist = await _catalogoRepository.obtenerUnidadNegocio(consulta.idArea, consulta.idSolicitud);
                 resultado.exito = true;
-                resultado.datalist = lstunidadnegocio;
             }
             catch (Exception ex)
             {

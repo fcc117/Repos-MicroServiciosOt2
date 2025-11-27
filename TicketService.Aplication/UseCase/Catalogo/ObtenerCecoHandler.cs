@@ -5,29 +5,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TicketService.Aplication.Interfaces.Catalogo;
-using TicketService.Aplication.Interfaces.Tickets;
-using TicketService.Aplication.UseCase.ObtenerTickets;
-using TicketService.Domain.Entities;
 using TicketService.Domain.Entities.Catalogo;
 using Utilities.Entities;
 
 namespace TicketService.Aplication.UseCase.Catalogo
 {
-    public class ObtenerAreaServicioHandler: IRequestHandler<ObtenerAreaServicioQuery, EntResultado<EntCatalogo>>
+    public class ObtenerCecoHandler : IRequestHandler<ObtenerCecoQuery, EntResultado<EntCeco>>
     {
         private readonly ICatalogoRepository _catalogoRepository;
 
-        public ObtenerAreaServicioHandler(ICatalogoRepository catalogoRepository)
+        public ObtenerCecoHandler(ICatalogoRepository catalogoRepository)
         {
             _catalogoRepository = catalogoRepository;
         }
 
-        public async Task<EntResultado<EntCatalogo>> Handle(ObtenerAreaServicioQuery consulta, CancellationToken cancellationToken)
+        public async Task<EntResultado<EntCeco>> Handle(ObtenerCecoQuery consulta, CancellationToken cancellationToken)
         {
-            var resultado = new EntResultado<EntCatalogo>();
+            var resultado = new EntResultado<EntCeco>();
             try
             {
-                resultado.datalist = await _catalogoRepository.obtenerAreaServicio();
+                resultado.datalist = await _catalogoRepository.obtenerCeco();
                 resultado.exito = true;
             }
             catch (Exception ex)

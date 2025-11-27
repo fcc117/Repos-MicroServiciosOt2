@@ -9,9 +9,9 @@ using Utilities.Entities;
 
 namespace TicketService.Aplication.UseCase.Catalogo
 {
-    public class ObtenerUnidadNegocioQuery : IRequest<EntResultado<EntCatalogo>>
+    public class ObtenerAuditoresQuery : IRequest<EntResultado<EntAuditor>>
     {
-        public int idArea { get; set; }
-        public int idSolicitud { get; set; }
+        public string busqueda { get; set; }
     }
+    
 }

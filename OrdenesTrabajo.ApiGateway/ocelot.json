@@ -173,6 +173,60 @@
         //"AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
       }
+    },
+    {
+      "UpstreamPathTemplate": "/Catalogo/ObtenerReferente",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+
+      "DownstreamPathTemplate": "/TicketService/api/Catalogo/ObtenerReferente",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8009
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "",
+        //"AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/Catalogo/ObtenerCeco",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+
+      "DownstreamPathTemplate": "/TicketService/api/Catalogo/ObtenerCeco",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8009
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "",
+        //"AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/Catalogo/ObtenerAuditores",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+
+      "DownstreamPathTemplate": "/TicketService/api/Catalogo/ObtenerAuditores",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8009
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "",
+        //"AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     }
   ],
 

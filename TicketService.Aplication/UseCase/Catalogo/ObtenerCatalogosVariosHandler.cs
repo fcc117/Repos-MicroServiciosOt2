@@ -22,12 +22,10 @@ namespace TicketService.Aplication.UseCase.Catalogo
         public async Task<EntResultado<EntCatalogo>> Handle(ObtenerCatalogosVariosQuery consulta, CancellationToken cancellationToken)
         {
             var resultado = new EntResultado<EntCatalogo>();
-            var lstcatalogos = new List<EntCatalogo>();
             try
             {
                 resultado.datalist = await _catalogoRepository.obtenerCatalogosVarios(consulta.opc, consulta.idParam, consulta.nombreParam);
                 resultado.exito = true;
-                resultado.datalist = lstcatalogos;
             }
             catch (Exception ex)
             {

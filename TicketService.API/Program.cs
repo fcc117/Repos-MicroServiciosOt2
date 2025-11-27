@@ -8,6 +8,7 @@ using TicketService.Aplication.Interfaces.Tickets;
 using TicketService.Aplication.UseCase.ObtenerTickets;
 using TicketService.Aplication.Interfaces.Catalogo;
 using TicketService.Infrastructure.Persistence.Catalogo;
+using TicketService.Aplication.UseCase.Catalogo;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,7 +35,14 @@ builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 builder.Services.AddScoped<ICatalogoRepository, CatalogoRepository>();
 
 // base de datos
+//******************tickets*******************************
 builder.Services.AddDbContext<TicketDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("OrdenesTrabajoConnection"), SqlServerOptions =>
+    {
+        SqlServerOptions.CommandTimeout(120);
+    }));
+//******************catalogo*******************************
+builder.Services.AddDbContext<CatalogoDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("OrdenesTrabajoConnection"), SqlServerOptions =>
     {
         SqlServerOptions.CommandTimeout(120);
@@ -42,7 +50,13 @@ builder.Services.AddDbContext<TicketDbContext>(options =>
 
 // Registrar MediatR
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ObtenerTotalesTicketHandler).Assembly));
-
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ObtenerAreaServicioHandler).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ObtenerTipoSolicitudHandler).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ObtenerUnidadNegocioHandler).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ObtenerCatalogosVariosHandler).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ObtenerReferenteHandler).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ObtenerCecoHandler).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ObtenerAuditoresHandler).Assembly));
 
 // Add services to the container.
 builder.Services.AddControllers();

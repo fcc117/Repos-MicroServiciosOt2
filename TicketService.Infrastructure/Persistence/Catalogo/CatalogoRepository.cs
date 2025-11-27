@@ -24,13 +24,25 @@ namespace TicketService.Infrastructure.Persistence.Catalogo
         {
             return await Task.Run(() => _dbContext.obtenerTipoSolicitud(idArea));
         }
-        public async Task<List<EntCatalogo>> obtenerUnidadNegocio(int idArea, int idRequerimiento)
+        public async Task<List<EntCatalogo>> obtenerUnidadNegocio(int idArea, int idSolicitud)
         {
-            return await Task.Run(() => _dbContext.obtenerUnidadNegocio(idArea, idRequerimiento));
+            return await Task.Run(() => _dbContext.obtenerUnidadNegocio(idArea, idSolicitud));
         }
         public async Task<List<EntCatalogo>> obtenerCatalogosVarios(int opc, int idParam, string nombreParam)
         {
             return await Task.Run(() => _dbContext.obtenerCatalogosVarios(opc, idParam, nombreParam));
+        }
+        public async Task<List<EntCatalogo>> obtenerReferente(int idArea, int idSolicitud, int idUnidadNegocio, int estatus)
+        {
+            return await Task.Run(() => _dbContext.obtenerReferente(idArea, idSolicitud, idUnidadNegocio, estatus));
+        }
+        public async Task<List<EntCeco>> obtenerCeco()
+        {
+            return await Task.Run(() => _dbContext.obtenerCeco());
+        }
+        public async Task<List<EntAuditor>> obtenerAuditores(string busqueda)
+        {
+            return await Task.Run(() => _dbContext.obtenerAuditores(busqueda));
         }
     }
 }
