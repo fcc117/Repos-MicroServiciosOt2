@@ -22,5 +22,10 @@ namespace TicketService.Infrastructure.Persistence
         {
             return await _ticketDbContext.obtenerTotalesTicketAsync(fcNumeroEmpleado);
         }
+
+        public async Task<int?> insertarNuevoTicketAsync(EntTicket model)
+        {
+            return await _ticketDbContext.insertarNuevoTicketAsync(model);
+        }
     }
 }

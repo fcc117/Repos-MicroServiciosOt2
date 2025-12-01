@@ -1,8 +1,9 @@
-﻿namespace TicketService.API.Models.Ticket
+﻿using TicketService.Domain.Entities;
+
+namespace TicketService.API.Models.Ticket
 {
     public class TicketRequest
     {
-        public string fcNumeroEmpleado { get; set; }
-
+        public EntTicket model { get; set; }
     }
 }

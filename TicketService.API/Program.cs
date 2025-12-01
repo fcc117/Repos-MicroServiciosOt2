@@ -9,6 +9,7 @@ using TicketService.Aplication.UseCase.ObtenerTickets;
 using TicketService.Aplication.Interfaces.Catalogo;
 using TicketService.Infrastructure.Persistence.Catalogo;
 using TicketService.Aplication.UseCase.Catalogo;
+using TicketService.Aplication.UseCase.Tickets.InsertarTicket;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -57,6 +58,8 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Obten
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ObtenerReferenteHandler).Assembly));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ObtenerCecoHandler).Assembly));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ObtenerAuditoresHandler).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(InsertarTicketHandler).Assembly));
+
 
 // Add services to the container.
 builder.Services.AddControllers();

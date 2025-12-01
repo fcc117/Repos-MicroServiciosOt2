@@ -10,6 +10,7 @@ namespace TicketService.Aplication.Interfaces.Tickets
     public interface ITicketRepository
     {
         Task<List<EntTotalesTickets>> obtenerTotalesTicketAsync(string fcNumeroEmpleado);
+        Task<int?> insertarNuevoTicketAsync(EntTicket model);
 
     }
 }
