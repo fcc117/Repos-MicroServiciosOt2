@@ -1,8 +1,10 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using TicketService.Aplication.Interfaces.Tickets;
 using TicketService.Aplication.UseCase.ObtenerTickets;
@@ -25,6 +27,7 @@ namespace TicketService.Aplication.UseCase.Tickets.InsertarTicket
             var resultado = new EntResultado();
             try
             {
+               
                 var folio = await _ticketRepository.insertarNuevoTicketAsync(consulta.model);
                 if(folio > 0)
                 {

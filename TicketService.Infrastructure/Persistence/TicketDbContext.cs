@@ -58,13 +58,15 @@ namespace TicketService.Infrastructure.Persistence
 
             foreach (var doc in model.listaDocumentos)
             {
+                byte[] archivo = Convert.FromBase64String(doc.archivo);
+
                 dtable.Rows.Add(
                     doc.folio,
                     doc.nombre,
-                    doc.archivo,
+                    archivo,
                     doc.tamaño,
-                    doc.extension,
-                    doc.usuario_llave_maestra
+                    doc.extension
+                    
                 );
             }
             var tableType = new SqlParameter("@listaDocumentos", SqlDbType.Structured)

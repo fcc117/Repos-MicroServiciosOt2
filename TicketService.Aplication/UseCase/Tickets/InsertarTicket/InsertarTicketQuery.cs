@@ -11,6 +11,7 @@ namespace TicketService.Aplication.UseCase.Tickets.InsertarTicket
 {
     public class InsertarTicketQuery : IRequest<EntResultado>
     {
-       public EntTicket model { get; set; }
+       public EntTicket? model { get; set; }
+
     }
 }
