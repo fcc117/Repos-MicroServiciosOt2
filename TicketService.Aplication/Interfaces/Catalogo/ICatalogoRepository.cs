@@ -18,6 +18,10 @@ namespace TicketService.Aplication.Interfaces.Catalogo
         Task<List<EntCatalogo>> obtenerReferente(int idArea, int idSolicitud, int idUnidadNegocio, int estatus);
         Task<List<EntCeco>> obtenerCeco();
         Task<List<EntAuditor>> obtenerAuditores(string busqueda);
+        Task<List<EntCatalogo>> obtenerVerTickets(string fcNumeroEmpleado);
+        Task<List<EntCatalogo>> obtenerEstatus();
+        Task<List<EntCatalogo>> obtenerAntiguedad();
+
 
     }
 }

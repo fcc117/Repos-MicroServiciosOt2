@@ -27,5 +27,11 @@ namespace TicketService.Infrastructure.Persistence
         {
             return await _ticketDbContext.insertarNuevoTicketAsync(model);
         }
+
+        public async Task<List<EntTickets>> obtenerTickets(EntTicketParam model)
+        {
+            return await _ticketDbContext.obtenerTickets(model);
+        }
+
     }
 }

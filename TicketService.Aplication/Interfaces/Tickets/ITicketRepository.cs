@@ -11,6 +11,8 @@ namespace TicketService.Aplication.Interfaces.Tickets
     {
         Task<List<EntTotalesTickets>> obtenerTotalesTicketAsync(string fcNumeroEmpleado);
         Task<int?> insertarNuevoTicketAsync(EntTicket model);
+        Task<List<EntTickets>> obtenerTickets(EntTicketParam model);
+
 
     }
 }

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TicketService.Domain.Entities;
+using TicketService.Domain.Entities.Catalogo;
 
 namespace TicketService.Infrastructure.Persistence
 {
@@ -19,6 +20,8 @@ namespace TicketService.Infrastructure.Persistence
 
         }
         public DbSet<EntTotalesTickets> entTotalesTickets { get; set; }
+        public DbSet<EntTickets> entTickets { get; set; }
+
 
         public async Task<List<EntTotalesTickets>> obtenerTotalesTicketAsync(string fcNumeroEmpleado)
         {
@@ -87,5 +90,22 @@ namespace TicketService.Infrastructure.Persistence
             return paramFolio.Value as int?;
         }
 
+        public async Task<List<EntTickets>> obtenerTickets(EntTicketParam model)
+        {
+            return await entTickets.FromSqlInterpolated($@"EXEC dbo.Tickets_consulta_obtener_tickets 
+                                                            {model.UsuarioLlaveMaestra},
+                                                            {model.FolioTicket},
+                                                            {model.AuditorSolicitante},
+                                                            {model.AntiguedadRango},
+                                                            {model.Antiguedad},
+                                                            {model.FechaRegistroDesde},
+                                                            {model.FechaRegistroHasta},
+                                                            {model.IdEstatus},
+                                                            {model.FechaCierreDesde},
+                                                            {model.FechaCierreHasta},
+                                                            {model.IdVerRegistros},
+                                                            {model.IdArea}").ToListAsync();
+
+        }
     }
 }

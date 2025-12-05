@@ -49,6 +49,18 @@ namespace TicketService.Infrastructure.Persistence.Catalogo
         {
             return await entAuditor.FromSqlInterpolated($"EXEC dbo.Tickets_catalogos_obtener_auditores {busqueda}").ToListAsync();
         }
+        public async Task<List<EntCatalogo>> obtenerVerTickets(string fcNumeroEmpleado)
+        {
+            return await entCatalogo.FromSqlInterpolated($"EXEC dbo.spConsOT2VerTickets {fcNumeroEmpleado}").ToListAsync();
+        }
+        public async Task<List<EntCatalogo>> obtenerEstatus()
+        {
+            return await entCatalogo.FromSqlRaw("EXEC dbo.tickets_catalogos_obtener_estatus").ToListAsync();
+        }
+        public async Task<List<EntCatalogo>> obtenerAntiguedad()
+        {
+            return await entCatalogo.FromSqlRaw("EXEC dbo.spConsOT2Antiguedad").ToListAsync();
+        }
     }
     
 }

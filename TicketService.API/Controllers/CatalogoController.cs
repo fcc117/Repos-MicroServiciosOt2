@@ -115,5 +115,47 @@ namespace TicketService.API.Controllers
                 return Ok(resultado);
             }
         }
+
+        [HttpPost("ObtenerVerTickets")]
+        public async Task<IActionResult> ObtenerVerTickets([FromBody] VerTicketsRequest request)
+        {
+            var resultado = await _mediator.Send(new ObtenerVerTicketsQuery { fcNumeroEmpleado = request.fcNumeroEmpleado });
+            if (resultado.exito == null)
+            {
+                return BadRequest(resultado);
+            }
+            else
+            {
+                return Ok(resultado);
+            }
+        }
+
+        [HttpPost("ObtenerEstatus")]
+        public async Task<IActionResult> ObtenerEstatus()
+        {
+            var resultado = await _mediator.Send(new ObtenerEstatusQuery {  });
+            if (resultado.exito == null)
+            {
+                return BadRequest(resultado);
+            }
+            else
+            {
+                return Ok(resultado);
+            }
+        }
+        [HttpPost("ObtenerAntiguedad")]
+        public async Task<IActionResult> ObtenerAntiguedad()
+        {
+            var resultado = await _mediator.Send(new ObtenerAntiguedadQuery { });
+            if (resultado.exito == null)
+            {
+                return BadRequest(resultado);
+            }
+            else
+            {
+                return Ok(resultado);
+            }
+        }
+
     }
 }

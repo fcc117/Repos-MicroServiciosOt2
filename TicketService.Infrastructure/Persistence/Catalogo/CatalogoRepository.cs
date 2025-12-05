@@ -44,5 +44,18 @@ namespace TicketService.Infrastructure.Persistence.Catalogo
         {
             return await Task.Run(() => _dbContext.obtenerAuditores(busqueda));
         }
+        public async Task<List<EntCatalogo>> obtenerVerTickets(string fcNumeroEmpleado)
+        {
+            return await Task.Run(() => _dbContext.obtenerVerTickets(fcNumeroEmpleado));
+        }
+        public async Task<List<EntCatalogo>> obtenerEstatus()
+        {
+            return await Task.Run(() => _dbContext.obtenerEstatus());
+        }
+        public async Task<List<EntCatalogo>> obtenerAntiguedad()
+        {
+            return await Task.Run(() => _dbContext.obtenerAntiguedad());
+        }
+
     }
 }

@@ -245,6 +245,78 @@
         //"AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
       }
+    },
+    {
+      "UpstreamPathTemplate": "/Catalogo/ObtenerVerTickets",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+
+      "DownstreamPathTemplate": "/TicketService/api/Catalogo/ObtenerVerTickets",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8009
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "",
+        //"AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/Catalogo/ObtenerEstatus",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+
+      "DownstreamPathTemplate": "/TicketService/api/Catalogo/ObtenerEstatus",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8009
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "",
+        //"AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/Catalogo/ObtenerAntiguedad",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+
+      "DownstreamPathTemplate": "/TicketService/api/Catalogo/ObtenerAntiguedad",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8009
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "",
+        //"AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/Ticket/ObtenerTickets",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+
+      "DownstreamPathTemplate": "/TicketService/api/Ticket/ObtenerTickets",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8009
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "",
+        //"AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     }
   ],
 
