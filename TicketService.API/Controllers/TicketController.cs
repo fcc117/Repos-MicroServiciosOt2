@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TicketService.API.Models.Ticket;
 using TicketService.Aplication.UseCase.ObtenerTickets;
+using TicketService.Aplication.UseCase.Tickets.DetalleTicket;
 using TicketService.Aplication.UseCase.Tickets.InsertarTicket;
 using TicketService.Aplication.UseCase.Tickets.ObtenerListaTickets;
 
@@ -49,6 +50,20 @@ namespace TicketService.API.Controllers
         public async Task<IActionResult> ObtenerTickets([FromBody] TicketsRequest request)
         {
             var resultado = await _mediator.Send(new ObtenerTicketsQuery { model = request.model });
+            if (resultado.exito == null)
+            {
+                return BadRequest(resultado);
+            }
+            else
+            {
+                return Ok(resultado);
+            }
+        }
+
+        [HttpPost("ObtenerDetalleTicket")]
+        public async Task<IActionResult> ObtenerDetalleTicket([FromBody] TicketDetalleRequest request)
+        {
+            var resultado = await _mediator.Send(new ObtenerDetalleTicketQuery { folio = request.folio });
             if (resultado.exito == null)
             {
                 return BadRequest(resultado);

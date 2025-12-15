@@ -32,6 +32,9 @@ namespace TicketService.Infrastructure.Persistence
         {
             return await _ticketDbContext.obtenerTickets(model);
         }
-
+        public async Task<EntDetalleTicket> obtenerDetalleGeneral(int folio)
+        {
+            return await _ticketDbContext.obtenerDetalleGeneral(folio) ?? new EntDetalleTicket();
+        }
     }
 }

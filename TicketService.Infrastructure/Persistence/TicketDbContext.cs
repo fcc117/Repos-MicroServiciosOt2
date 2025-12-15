@@ -21,6 +21,7 @@ namespace TicketService.Infrastructure.Persistence
         }
         public DbSet<EntTotalesTickets> entTotalesTickets { get; set; }
         public DbSet<EntTickets> entTickets { get; set; }
+        public DbSet<EntDetalleTicket> entDetalleTicket { get; set; }
 
 
         public async Task<List<EntTotalesTickets>> obtenerTotalesTicketAsync(string fcNumeroEmpleado)
@@ -106,6 +107,15 @@ namespace TicketService.Infrastructure.Persistence
                                                             {model.IdVerRegistros},
                                                             {model.IdArea}").ToListAsync();
 
+        }
+
+        public async Task<EntDetalleTicket?> obtenerDetalleGeneral(int folio)
+        {
+            if (folio == 0)
+                return new EntDetalleTicket();
+
+            var rows = await entDetalleTicket.FromSqlInterpolated($"EXEC [dbo].[spConsOT2DatosGenerales] {folio}").AsNoTracking().ToListAsync();
+            return rows.SingleOrDefault();
         }
     }
 }

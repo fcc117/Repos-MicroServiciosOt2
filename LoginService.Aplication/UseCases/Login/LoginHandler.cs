@@ -83,6 +83,7 @@ namespace LoginService.Aplication.UseCases.Login
                             refreshToken = _jwtgenerator.generaRefreshToken(objUsuario.fnNumeroEmpleado);
                             lstmenu = await _menuService.ObtenerMenuPorEmpleadoAsync(request.fcNumeroEmpleado, token);
 
+                            objUsuario.lstRolesUsuario = lstRolesUsr;
                             result.objectlist = lstmenu.Cast<object>().ToList();
                             result.data = objUsuario;
                             result.exito = true;

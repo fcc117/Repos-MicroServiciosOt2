@@ -1,16 +1,17 @@
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using TicketService.Infrastructure.Persistence;
-using TicketService.Aplication.Interfaces.Tickets;
-using TicketService.Aplication.UseCase.ObtenerTickets;
 using TicketService.Aplication.Interfaces.Catalogo;
-using TicketService.Infrastructure.Persistence.Catalogo;
+using TicketService.Aplication.Interfaces.Tickets;
 using TicketService.Aplication.UseCase.Catalogo;
+using TicketService.Aplication.UseCase.ObtenerTickets;
+using TicketService.Aplication.UseCase.Tickets.DetalleTicket;
 using TicketService.Aplication.UseCase.Tickets.InsertarTicket;
 using TicketService.Aplication.UseCase.Tickets.ObtenerListaTickets;
+using TicketService.Infrastructure.Persistence;
+using TicketService.Infrastructure.Persistence.Catalogo;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -64,6 +65,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Obten
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ObtenerEstatusHandler).Assembly));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ObtenerAntiguedadHandler).Assembly));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ObtenerTicketsHandler).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ObtenerDetalleTicketHandler).Assembly));
 
 
 // Add services to the container.
